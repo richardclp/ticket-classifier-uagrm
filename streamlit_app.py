@@ -8,12 +8,12 @@ import streamlit as st
 
 # Show app title and description.
 st.set_page_config(page_title="Support tickets", page_icon="🎫")
-st.title("🎫 Support tickets")
+st.title("🎫 Soporte de tickets")
 st.write(
     """
-    This app shows how you can build an internal tool in Streamlit. Here, we are 
-    implementing a support ticket workflow. The user can create a ticket, edit 
-    existing tickets, and view some statistics.
+    Esta aplicación muestra cómo puedes crear una herramienta interna en Streamlit.
+    Aquí estamos implementar un flujo de trabajo de tickets de soporte. 
+    El usuario puede crear un ticket, editar tickets existentes y ver algunas estadísticas.
     """
 )
 
@@ -98,12 +98,12 @@ if submitted:
     st.session_state.df = pd.concat([df_new, st.session_state.df], axis=0)
 
 # Show section to view and edit existing tickets in a table.
-st.header("Existing tickets")
-st.write(f"Number of tickets: `{len(st.session_state.df)}`")
+st.header("Tickets existentes")
+st.write(f"Numero de tickets: `{len(st.session_state.df)}`")
 
 st.info(
-    "You can edit the tickets by double clicking on a cell. Note how the plots below "
-    "update automatically! You can also sort the table by clicking on the column headers.",
+    "Puedes editar los tickets haciendo doble clic en una celda. ¡Observe cómo los gráficos a continuación se actualizan"
+    "automáticamente! También puede ordenar la tabla haciendo clic en los encabezados de las columnas.",
     icon="✍️",
 )
 
