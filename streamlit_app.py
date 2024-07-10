@@ -148,7 +148,7 @@ status_plot = (
     alt.Chart(edited_df)
     .mark_bar()
     .encode(
-        x="month(Date Submitted):O",
+        x="month(Fecha Enviado):O",
         y="count():Q",
         xOffset="Estado:N",
         color="Estado:N",
