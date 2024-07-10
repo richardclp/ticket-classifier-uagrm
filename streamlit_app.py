@@ -5,6 +5,7 @@ import altair as alt
 import numpy as np
 import pandas as pd
 import streamlit as st
+import time
 
 # Show app title and description.
 st.set_page_config(page_title="Support tickets", page_icon="🎫")
@@ -68,6 +69,12 @@ if "df" not in st.session_state:
 # Show a section to add a new ticket.
 st.header("Agregar un ticket")
 
+#------------------------------------------------------------------------
+# Mantén un estado para controlar la actualización del campo de texto
+if "last_issue" not in st.session_state:
+    st.session_state.last_issue = ""
+#------------------------------------------------------------------------
+
 # We're adding tickets via an `st.form` and some input widgets. If widgets are used
 # in a form, the app will only rerun once the submit button is pressed.
 with st.form("add_ticket_form"):
@@ -75,6 +82,20 @@ with st.form("add_ticket_form"):
     priority = st.selectbox("Prioridad", ["Alto", "Medio", "Bajo"])
     submitted = st.form_submit_button("Enviar")
 
+#------------------------------------------------------------------------
+# Comprueba si el contenido del campo ha cambiado
+if issue != st.session_state.last_issue:
+    # Actualiza el estado con el nuevo contenido
+    st.session_state.last_issue = issue
+    st.write("Texto actualizado:", issue)
+    # Llama a una función o actualiza la interfaz
+    # Aquí puedes poner el código que quieres ejecutar en cada 'onkeyup'
+    st.write("Procesando cambio...")
+    time.sleep(1)  # Simula un proceso
+
+# Mostrar el contenido del campo en tiempo real
+st.write("Contenido actual:", issue)
+#------------------------------------------------------------------------
 if submitted:
     # Make a dataframe for the new ticket and append it to the dataframe in session
     # state.
