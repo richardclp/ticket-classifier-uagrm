@@ -1,10 +1,10 @@
 import datetime
 import random
-
 import altair as alt
 import numpy as np
 import pandas as pd
 import streamlit as st
+import streamlit.components.v1 as components
 import time
 
 # Show app title and description.
@@ -13,7 +13,7 @@ st.title("🎫 Soporte de tickets")
 st.write(
     """
     Esta aplicación muestra cómo puedes crear una herramienta interna en Streamlit.
-    Aquí estamos implementar un flujo de trabajo de tickets de soporte. 
+    Aquí estamos implementando un flujo de trabajo de tickets de soporte. 
     El usuario puede crear un ticket, editar tickets existentes y ver algunas estadísticas.
     """
 )
@@ -69,33 +69,19 @@ if "df" not in st.session_state:
 # Show a section to add a new ticket.
 st.header("Agregar un ticket")
 
-#------------------------------------------------------------------------
-# Mantén un estado para controlar la actualización del campo de texto
-if "last_issue" not in st.session_state:
-    st.session_state.last_issue = ""
-#------------------------------------------------------------------------
+# Cargar el archivo HTML personalizado
+with open('custom_text_area.html', 'r', encoding='utf-8') as f:
+    custom_text_area = f.read()
 
-# We're adding tickets via an `st.form` and some input widgets. If widgets are used
-# in a form, the app will only rerun once the submit button is pressed.
-with st.form("add_ticket_form"):
-    issue = st.text_area("Describa el problema")
-    priority = st.selectbox("Prioridad", ["Alto", "Medio", "Bajo"])
-    submitted = st.form_submit_button("Enviar")
+# Crear el componente Streamlit
+custom_component = components.declare_component("custom_text_area", html=custom_text_area)
 
-#------------------------------------------------------------------------
-# Comprueba si el contenido del campo ha cambiado
-if issue != st.session_state.last_issue:
-    # Actualiza el estado con el nuevo contenido
-    st.session_state.last_issue = issue
-    st.write("Texto actualizado:", issue)
-    # Llama a una función o actualiza la interfaz
-    # Aquí puedes poner el código que quieres ejecutar en cada 'onkeyup'
-    st.write("Procesando cambio...")
-    time.sleep(1)  # Simula un proceso
+# Mostrar el componente en Streamlit
+issue = custom_component()
 
-# Mostrar el contenido del campo en tiempo real
-st.write("Contenido actual:", issue)
-#------------------------------------------------------------------------
+priority = st.selectbox("Prioridad", ["Alto", "Medio", "Bajo"])
+submitted = st.button("Enviar")
+
 if submitted:
     # Make a dataframe for the new ticket and append it to the dataframe in session
     # state.
@@ -157,7 +143,7 @@ st.header("Estadisticas")
 
 # Show metrics side by side using `st.columns` and `st.metric`.
 col1, col2, col3 = st.columns(3)
-num_open_tickets = len(st.session_state.df[st.session_state.df.Estado == "Open"])
+num_open_tickets = len(st.session_state.df[st.session_state.df.Estado == "Abierto"])
 col1.metric(label="Número de tickets abiertos", value=num_open_tickets, delta=10)
 col2.metric(label="Tiempo de primera respuesta (horas)", value=5.2, delta=-1.5)
 col3.metric(label="Tiempo medio de resolución (horas)", value=16, delta=2)
@@ -191,3 +177,4 @@ priority_plot = (
     )
 )
 st.altair_chart(priority_plot, use_container_width=True, theme="streamlit")
+
