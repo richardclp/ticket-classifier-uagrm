@@ -25,36 +25,36 @@ if "df" not in st.session_state:
 
     # Make up some fake issue descriptions.
     issue_descriptions = [
-        "Network connectivity issues in the office",
-        "Software application crashing on startup",
-        "Printer not responding to print commands",
-        "Email server downtime",
-        "Data backup failure",
-        "Login authentication problems",
-        "Website performance degradation",
-        "Security vulnerability identified",
-        "Hardware malfunction in the server room",
-        "Employee unable to access shared files",
-        "Database connection failure",
-        "Mobile application not syncing data",
-        "VoIP phone system issues",
-        "VPN connection problems for remote employees",
-        "System updates causing compatibility issues",
-        "File server running out of storage space",
-        "Intrusion detection system alerts",
-        "Inventory management system errors",
-        "Customer data not loading in CRM",
-        "Collaboration tool not sending notifications",
+        "Problemas de conectividad de red en la oficina",
+        "Aplicación de software se bloquea al iniciar",
+        "La impresora no responde a los comandos de impresión",
+        "Tiempo de inactividad del servidor de correo electrónico",
+        "Fallo en la copia de seguridad de datos",
+        "Problemas de autenticación de inicio de sesión",
+        "Degradación del rendimiento del sitio web",
+        "Vulnerabilidad de seguridad identificada",
+        "Fallo de hardware en la sala de servidores",
+        "Empleado no puede acceder a los archivos compartidos",
+        "Fallo de conexión a la base de datos",
+        "La aplicación móvil no sincroniza datos",
+        "Problemas con el sistema de teléfonos VoIP",
+        "Problemas de conexión VPN para empleados remotos",
+        "Actualizaciones del sistema causan problemas de compatibilidad",
+        "El servidor de archivos se está quedando sin espacio de almacenamiento",
+        "Alertas del sistema de detección de intrusos",
+        "Errores en el sistema de gestión de inventarios",
+        "Los datos de clientes no se cargan en el CRM",
+        "La herramienta de colaboración no envía notificaciones",
     ]
 
     # Generate the dataframe with 100 rows/tickets.
     data = {
         "ID": [f"TICKET-{i}" for i in range(1100, 1000, -1)],
         "Issue": np.random.choice(issue_descriptions, size=100),
-        "Status": np.random.choice(["Open", "In Progress", "Closed"], size=100),
-        "Priority": np.random.choice(["High", "Medium", "Low"], size=100),
+        "Status": np.random.choice(["Abierto", "En Progreso", "Cerrado"], size=100),
+        "Priority": np.random.choice(["Alto", "Medio", "Bajo"], size=100),
         "Date Submitted": [
-            datetime.date(2023, 6, 1) + datetime.timedelta(days=random.randint(0, 182))
+            datetime.date(2024, 1, 1) + datetime.timedelta(days=random.randint(0, 182))
             for _ in range(100)
         ],
     }
@@ -71,9 +71,9 @@ st.header("Agregar un ticket")
 # We're adding tickets via an `st.form` and some input widgets. If widgets are used
 # in a form, the app will only rerun once the submit button is pressed.
 with st.form("add_ticket_form"):
-    issue = st.text_area("Describe the issue")
-    priority = st.selectbox("Priority", ["High", "Medium", "Low"])
-    submitted = st.form_submit_button("Submit")
+    issue = st.text_area("Describa el problema")
+    priority = st.selectbox("Prioridad", ["Alto", "Medio", "Bajo"])
+    submitted = st.form_submit_button("Enviar")
 
 if submitted:
     # Make a dataframe for the new ticket and append it to the dataframe in session
@@ -84,16 +84,16 @@ if submitted:
         [
             {
                 "ID": f"TICKET-{recent_ticket_number+1}",
-                "Issue": issue,
-                "Status": "Open",
-                "Priority": priority,
-                "Date Submitted": today,
+                "Asunto": issue,
+                "Status": "Abierto",
+                "Estado": priority,
+                "Fecha Enviado": today,
             }
         ]
     )
 
     # Show a little success message.
-    st.write("Ticket submitted! Here are the ticket details:")
+    st.write("Ticket enviado! Aquí están los detalles del ticket.:")
     st.dataframe(df_new, use_container_width=True, hide_index=True)
     st.session_state.df = pd.concat([df_new, st.session_state.df], axis=0)
 
@@ -115,35 +115,35 @@ edited_df = st.data_editor(
     hide_index=True,
     column_config={
         "Status": st.column_config.SelectboxColumn(
-            "Status",
-            help="Ticket status",
-            options=["Open", "In Progress", "Closed"],
+            "Estado",
+            help="Estado del Ticket",
+            options=["Abierto", "En Progreso", "Cerrado"],
             required=True,
         ),
         "Priority": st.column_config.SelectboxColumn(
-            "Priority",
-            help="Priority",
-            options=["High", "Medium", "Low"],
+            "Prioridad",
+            help="Prioridad",
+            options=["Alto", "Medio", "Bajo"],
             required=True,
         ),
     },
     # Disable editing the ID and Date Submitted columns.
-    disabled=["ID", "Date Submitted"],
+    disabled=["ID", "Fecha Enviado"],
 )
 
 # Show some metrics and charts about the ticket.
-st.header("Statistics")
+st.header("Estadisticas")
 
 # Show metrics side by side using `st.columns` and `st.metric`.
 col1, col2, col3 = st.columns(3)
 num_open_tickets = len(st.session_state.df[st.session_state.df.Status == "Open"])
-col1.metric(label="Number of open tickets", value=num_open_tickets, delta=10)
-col2.metric(label="First response time (hours)", value=5.2, delta=-1.5)
-col3.metric(label="Average resolution time (hours)", value=16, delta=2)
+col1.metric(label="Número de tickets abiertos", value=num_open_tickets, delta=10)
+col2.metric(label="Tiempo de primera respuesta (horas)", value=5.2, delta=-1.5)
+col3.metric(label="Tiempo medio de resolución (horas)", value=16, delta=2)
 
 # Show two Altair charts using `st.altair_chart`.
 st.write("")
-st.write("##### Ticket status per month")
+st.write("##### Estado del ticket por mes")
 status_plot = (
     alt.Chart(edited_df)
     .mark_bar()
