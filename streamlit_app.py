@@ -86,7 +86,7 @@ if submitted:
                 "ID": f"TICKET-{recent_ticket_number+1}",
                 "Asunto": issue,
                 "Estado": "Abierto",
-                "Estado": priority,
+                "Prioridad": priority,
                 "Fecha Enviado": today,
             }
         ]
@@ -136,7 +136,7 @@ st.header("Estadisticas")
 
 # Show metrics side by side using `st.columns` and `st.metric`.
 col1, col2, col3 = st.columns(3)
-num_open_tickets = len(st.session_state.df[st.session_state.df.State == "Open"])
+num_open_tickets = len(st.session_state.df[st.session_state.df.Estado == "Open"])
 col1.metric(label="Número de tickets abiertos", value=num_open_tickets, delta=10)
 col2.metric(label="Tiempo de primera respuesta (horas)", value=5.2, delta=-1.5)
 col3.metric(label="Tiempo medio de resolución (horas)", value=16, delta=2)
