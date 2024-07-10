@@ -7,8 +7,7 @@ import streamlit as st
 import streamlit.components.v1 as components
 import time
 
-
-# Show app title and description.
+# Configurar la aplicación.
 st.set_page_config(page_title="Support tickets", page_icon="🎫")
 st.title("🎫 Soporte de tickets")
 st.write(
@@ -19,13 +18,13 @@ st.write(
     """
 )
 
-# Create a random Pandas dataframe with existing tickets.
+# Crear un DataFrame de Pandas con tickets existentes.
 if "df" not in st.session_state:
 
-    # Set seed for reproducibility.
+    # Establecer la semilla para reproducibilidad.
     np.random.seed(42)
 
-    # Make up some fake issue descriptions.
+    # Descripciones de problemas ficticias.
     issue_descriptions = [
         "Problemas de conectividad de red en la oficina",
         "Aplicación de software se bloquea al iniciar",
@@ -49,7 +48,7 @@ if "df" not in st.session_state:
         "La herramienta de colaboración no envía notificaciones",
     ]
 
-    # Generate the dataframe with 100 rows/tickets.
+    # Generar el DataFrame con 100 filas/tickets.
     data = {
         "ID": [f"TICKET-{i}" for i in range(1100, 1000, -1)],
         "Asunto": np.random.choice(issue_descriptions, size=100),
@@ -62,20 +61,15 @@ if "df" not in st.session_state:
     }
     df = pd.DataFrame(data)
 
-    # Save the dataframe in session state (a dictionary-like object that persists across
-    # page runs). This ensures our data is persisted when the app updates.
+    # Guardar el DataFrame en el estado de sesión.
     st.session_state.df = df
 
 
-# Show a section to add a new ticket.
+# Mostrar una sección para agregar un nuevo ticket.
 st.header("Agregar un ticket")
 
-# Cargar el archivo HTML personalizado
-with open('custom_text_area.html', 'r', encoding='utf-8') as f:
-    custom_text_area = f.read()
-
-# Crear el componente Streamlit
-custom_component = components.declare_component("custom_text_area", html=custom_text_area)
+# Declarar el componente personalizado
+custom_component = components.declare_component("custom_text_area", path="public")
 
 # Mostrar el componente en Streamlit
 issue = custom_component()
@@ -84,8 +78,7 @@ priority = st.selectbox("Prioridad", ["Alto", "Medio", "Bajo"])
 submitted = st.button("Enviar")
 
 if submitted:
-    # Make a dataframe for the new ticket and append it to the dataframe in session
-    # state.
+    # Crear un DataFrame para el nuevo ticket y añadirlo al DataFrame en el estado de sesión.
     recent_ticket_number = int(max(st.session_state.df.ID).split("-")[1])
     today = datetime.datetime.now().strftime("%m-%d-%Y")
     df_new = pd.DataFrame(
@@ -100,23 +93,21 @@ if submitted:
         ]
     )
 
-    # Show a little success message.
-    st.write("Ticket enviado! Aquí están los detalles del ticket.:")
+    # Mostrar un mensaje de éxito.
+    st.write("¡Ticket enviado! Aquí están los detalles del ticket:")
     st.dataframe(df_new, use_container_width=True, hide_index=True)
     st.session_state.df = pd.concat([df_new, st.session_state.df], axis=0)
 
-# Show section to view and edit existing tickets in a table.
+# Mostrar sección para ver y editar tickets existentes en una tabla.
 st.header("Tickets existentes")
-st.write(f"Numero de tickets: `{len(st.session_state.df)}`")
+st.write(f"Número de tickets: `{len(st.session_state.df)}`")
 
 st.info(
-    "Puedes editar los tickets haciendo doble clic en una celda. ¡Observe cómo los gráficos a continuación se actualizan"
-    "automáticamente! También puede ordenar la tabla haciendo clic en los encabezados de las columnas.",
+    "Puedes editar los tickets haciendo doble clic en una celda. ¡Observe cómo los gráficos a continuación se actualizan automáticamente! También puede ordenar la tabla haciendo clic en los encabezados de las columnas.",
     icon="✍️",
 )
 
-# Show the tickets dataframe with `st.data_editor`. This lets the user edit the table
-# cells. The edited data is returned as a new dataframe.
+# Mostrar el DataFrame de tickets con `st.data_editor`.
 edited_df = st.data_editor(
     st.session_state.df,
     use_container_width=True,
@@ -135,21 +126,21 @@ edited_df = st.data_editor(
             required=True,
         ),
     },
-    # Disable editing the ID and Date Submitted columns.
+    # Deshabilitar la edición de las columnas ID y Fecha Enviado.
     disabled=["ID", "Fecha Enviado"],
 )
 
-# Show some metrics and charts about the ticket.
-st.header("Estadisticas")
+# Mostrar algunas métricas y gráficos sobre los tickets.
+st.header("Estadísticas")
 
-# Show metrics side by side using `st.columns` and `st.metric`.
+# Mostrar métricas una al lado de la otra usando `st.columns` y `st.metric`.
 col1, col2, col3 = st.columns(3)
 num_open_tickets = len(st.session_state.df[st.session_state.df.Estado == "Abierto"])
 col1.metric(label="Número de tickets abiertos", value=num_open_tickets, delta=10)
 col2.metric(label="Tiempo de primera respuesta (horas)", value=5.2, delta=-1.5)
 col3.metric(label="Tiempo medio de resolución (horas)", value=16, delta=2)
 
-# Show two Altair charts using `st.altair_chart`.
+# Mostrar dos gráficos de Altair usando `st.altair_chart`.
 st.write("")
 st.write("##### Estado del ticket por mes")
 status_plot = (
@@ -167,7 +158,7 @@ status_plot = (
 )
 st.altair_chart(status_plot, use_container_width=True, theme="streamlit")
 
-st.write("##### Current ticket priorities")
+st.write("##### Prioridades actuales de tickets")
 priority_plot = (
     alt.Chart(edited_df)
     .mark_arc()
@@ -178,4 +169,3 @@ priority_plot = (
     )
 )
 st.altair_chart(priority_plot, use_container_width=True, theme="streamlit")
-
