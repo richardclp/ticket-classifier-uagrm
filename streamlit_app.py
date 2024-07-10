@@ -50,10 +50,10 @@ if "df" not in st.session_state:
     # Generate the dataframe with 100 rows/tickets.
     data = {
         "ID": [f"TICKET-{i}" for i in range(1100, 1000, -1)],
-        "Issue": np.random.choice(issue_descriptions, size=100),
-        "Status": np.random.choice(["Abierto", "En Progreso", "Cerrado"], size=100),
-        "Priority": np.random.choice(["Alto", "Medio", "Bajo"], size=100),
-        "Date Submitted": [
+        "Asunto": np.random.choice(issue_descriptions, size=100),
+        "Estado": np.random.choice(["Abierto", "En Progreso", "Cerrado"], size=100),
+        "Prioridad": np.random.choice(["Alto", "Medio", "Bajo"], size=100),
+        "Fecha Enviado": [
             datetime.date(2024, 1, 1) + datetime.timedelta(days=random.randint(0, 182))
             for _ in range(100)
         ],
@@ -85,7 +85,7 @@ if submitted:
             {
                 "ID": f"TICKET-{recent_ticket_number+1}",
                 "Asunto": issue,
-                "Status": "Abierto",
+                "Estado": "Abierto",
                 "Estado": priority,
                 "Fecha Enviado": today,
             }
@@ -114,13 +114,13 @@ edited_df = st.data_editor(
     use_container_width=True,
     hide_index=True,
     column_config={
-        "Status": st.column_config.SelectboxColumn(
+        "Estado": st.column_config.SelectboxColumn(
             "Estado",
             help="Estado del Ticket",
             options=["Abierto", "En Progreso", "Cerrado"],
             required=True,
         ),
-        "Priority": st.column_config.SelectboxColumn(
+        "Prioridad": st.column_config.SelectboxColumn(
             "Prioridad",
             help="Prioridad",
             options=["Alto", "Medio", "Bajo"],
@@ -136,7 +136,7 @@ st.header("Estadisticas")
 
 # Show metrics side by side using `st.columns` and `st.metric`.
 col1, col2, col3 = st.columns(3)
-num_open_tickets = len(st.session_state.df[st.session_state.df.Status == "Open"])
+num_open_tickets = len(st.session_state.df[st.session_state.df.Estado == "Open"])
 col1.metric(label="Número de tickets abiertos", value=num_open_tickets, delta=10)
 col2.metric(label="Tiempo de primera respuesta (horas)", value=5.2, delta=-1.5)
 col3.metric(label="Tiempo medio de resolución (horas)", value=16, delta=2)
@@ -150,8 +150,8 @@ status_plot = (
     .encode(
         x="month(Date Submitted):O",
         y="count():Q",
-        xOffset="Status:N",
-        color="Status:N",
+        xOffset="Estado:N",
+        color="Estado:N",
     )
     .configure_legend(
         orient="bottom", titleFontSize=14, labelFontSize=14, titlePadding=5
@@ -163,7 +163,7 @@ st.write("##### Current ticket priorities")
 priority_plot = (
     alt.Chart(edited_df)
     .mark_arc()
-    .encode(theta="count():Q", color="Priority:N")
+    .encode(theta="count():Q", color="Prioridad:N")
     .properties(height=300)
     .configure_legend(
         orient="bottom", titleFontSize=14, labelFontSize=14, titlePadding=5
