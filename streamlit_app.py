@@ -7,6 +7,7 @@ import streamlit as st
 import streamlit.components.v1 as components
 import time
 
+
 # Show app title and description.
 st.set_page_config(page_title="Support tickets", page_icon="🎫")
 st.title("🎫 Soporte de tickets")
