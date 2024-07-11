@@ -22,7 +22,7 @@ api_thread.start()
 time.sleep(5)
 
 # Show app title and description.
-st.set_page_config(page_title="Support tickets", page_icon="🎫")
+st.set_page_config(page_title="Tickets final (UAGRM)", page_icon="🎫")
 st.title("🎫 Soporte de tickets")
 st.write(
     """
