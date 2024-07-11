@@ -93,7 +93,7 @@ with st.form("add_ticket_form"):
 if submitted:
     # Hacer una llamada REST al servidor FastAPI para obtener la prioridad
     response = requests.post("http://127.0.0.1:8000/predict_priority", json={"issue": issue})
-    priority = response.json().get("priority", "Medio")
+    priority = response.json().get("priority", "bajo")
 
     # Make a dataframe for the new ticket and append it to the dataframe in session
     # state.
