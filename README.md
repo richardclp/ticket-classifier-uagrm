@@ -17,4 +17,4 @@ Una aplicación simple de Streamlit que muestra una herramienta interna que te p
    ```
    $ streamlit run streamlit_app.py
    ```
-   o ejecuta en la nube de streamlit [publicación de la app](https://ticket-classifier.streamlit.app/) (que automaticamente se publica por cada commit en el main)
+   o ejecuta en la nube de streamlit [publicación de la app](https://ticket-classifier.streamlit.app/){:target="_blank"} (que automaticamente se publica por cada commit en el main)
