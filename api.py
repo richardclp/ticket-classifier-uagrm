@@ -8,6 +8,6 @@ class Ticket(BaseModel):
 
 @app.post("/predict_priority")
 def predict_priority(ticket: Ticket):
-    # Aquí se realizaría la predicción con tu modelo de machine learning
+    # Aqui se realizara la prediccion con tu modelo de machine learning
     # Por ahora, simplemente devolvemos "Medio"
     return {"priority": "Medio"}
