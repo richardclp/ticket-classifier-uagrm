@@ -1,12 +1,25 @@
 import datetime
 import random
+import subprocess
+import threading
+import time
+
 import altair as alt
 import numpy as np
 import pandas as pd
+import requests
 import streamlit as st
-# ------------------------------------------------------------------------------------------------
-import requests  # Importa la librería requests para hacer la llamada REST
-# ------------------------------------------------------------------------------------------------
+
+# Función para iniciar el servidor FastAPI
+def run_api():
+    subprocess.run(["uvicorn", "api:app", "--host", "127.0.0.1", "--port", "8000"])
+
+# Iniciar el servidor FastAPI en un subproceso
+api_thread = threading.Thread(target=run_api, daemon=True)
+api_thread.start()
+
+# Esperar unos segundos para asegurarse de que el servidor FastAPI esté en funcionamiento
+time.sleep(5)
 
 # Show app title and description.
 st.set_page_config(page_title="Support tickets", page_icon="🎫")
@@ -78,13 +91,12 @@ with st.form("add_ticket_form"):
     submitted = st.form_submit_button("Enviar")
 
 if submitted:
-    # ------------------------------------------------------------------------------------------------
-    # Simula una llamada REST para evaluar la prioridad automáticamente
-    response = requests.post("URL_DEL_REST_API", json={"issue": issue})
-    if response.status_code == 200:
-        priority = response.json().get("priority", "Medio")  # Ajusta según la respuesta del API
-    # ------------------------------------------------------------------------------------------------
-    # Make a dataframe for the new ticket and append it to the dataframe in session state.
+    # Hacer una llamada REST al servidor FastAPI para obtener la prioridad
+    response = requests.post("http://127.0.0.1:8000/predict_priority", json={"issue": issue})
+    priority = response.json().get("priority", "Medio")
+
+    # Make a dataframe for the new ticket and append it to the dataframe in session
+    # state.
     recent_ticket_number = int(max(st.session_state.df.ID).split("-")[1])
     today = datetime.datetime.now().strftime("%m-%d-%Y")
     df_new = pd.DataFrame(
@@ -166,7 +178,7 @@ status_plot = (
 )
 st.altair_chart(status_plot, use_container_width=True, theme="streamlit")
 
-st.write("##### Current ticket priorities")
+st.write("##### Prioridades actuales de los tickets")
 priority_plot = (
     alt.Chart(edited_df)
     .mark_arc()
