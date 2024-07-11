@@ -10,4 +10,4 @@ class Ticket(BaseModel):
 def predict_priority(ticket: Ticket):
     # Aqui se realizara la prediccion con tu modelo de machine learning
     # Por ahora, simplemente devolvemos "Medio"
-    return {"priority": "test"}
+    return {"priority": "Medio"}
