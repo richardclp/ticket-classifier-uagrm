@@ -7,15 +7,15 @@ import pandas as pd
 import streamlit as st
 
 # Parametros de título y descripción de la aplicación.
-st.set_page_config(page_title="TicketEase (TFG Maestria en Ciencia de Datos - UAGRM)", page_icon="🎫")
+st.set_page_config(page_title="TicketEase - TFG Maestria en Ciencia de Datos UAGRM)", page_icon="🎫")
 st.title("🎫 Sistema TicketEase")
 st.markdown(
     """
-# Descripción de la Aplicación de Gestión de Tickets
+### Descripción de la Aplicación de **TicketEase** _(Gestión de Tickets)_
 
-Esta aplicación muestra cómo puedes crear una herramienta interna en Streamlit. Aquí estamos implementando un flujo de trabajo de tickets de soporte. El usuario puede crear un ticket, editar tickets existentes y ver algunas estadísticas.
+En esta aplicación estamos implementando un flujo de trabajo de tickets de soporte. El usuario puede crear un ticket, editar tickets existentes y ver algunas estadísticas.
 
-## Características principales
+#### Características principales
 
 1. **Crear Tickets:** Los usuarios pueden describir el problema y asignar una prioridad al ticket antes de enviarlo.
 2. **Editar Tickets:** Los tickets existentes pueden ser modificados para actualizar la información relevante o cambiar el estado.
@@ -118,7 +118,7 @@ if submitted:
     st.session_state.df = pd.concat([df_new, st.session_state.df], axis=0)
 
 # Mostrar sección para ver y editar tickets existentes en una tabla.
-st.header("Tickets existentes")
+st.subheader("Tickets existentes")
 st.write(f"Numero de tickets: `{len(st.session_state.df)}`")
 
 st.info(
@@ -152,7 +152,7 @@ edited_df = st.data_editor(
 )
 
 # Muestra algunas métricas y gráficos de los tickets.
-st.header("Estadisticas")
+st.subheader("Estadisticas")
 
 # Mostrando métricas una al lado de la otra usando `st.columns` y `st.metric`.
 col1, col2, col3 = st.columns(3)
