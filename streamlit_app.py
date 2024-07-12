@@ -72,6 +72,7 @@ if 'priority' not in st.session_state:
 
 # Definir la función de callback para actualizar la prioridad
 def on_text_change():
+    """
     issue_text = st.session_state.issue
     # Aquí puedes definir la lógica para cambiar la prioridad basada en el texto
     if "urgente" in issue_text.lower():
@@ -80,6 +81,11 @@ def on_text_change():
         st.session_state.priority = "Medio"
     else:
         st.session_state.priority = "Bajo"
+    """
+    # Actualizar cuadro de selección basado en new_text
+    pass
+    # Establecer indicador enviado para el envío del formulario
+    st.session_state.submitted = True
 
 # Show a section to add a new ticket.
 st.header("Agregar un ticket")
