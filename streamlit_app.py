@@ -158,6 +158,7 @@ col3.metric(label="Tiempo medio de resolución (horas)", value=16, delta=2)
 # Mostrar dos gráficos usando `st.altair_chart`.
 st.write("")
 st.write("##### Estado del ticket por mes")
+# creando un gráfico de barras apiladas, con la cantidad de tickets por estado para cada mes
 status_plot = (
     alt.Chart(edited_df)
     .mark_bar()
@@ -179,7 +180,7 @@ priority_counts = edited_df['Prioridad'].value_counts().reset_index()
 priority_counts.columns = ['Prioridad', 'count']
 priority_counts['percentage'] = (priority_counts['count'] / priority_counts['count'].sum()) * 100
 
-# Crear el gráfico de pastel con las etiquetas de porcentaje
+# Creando un gráfico de pastel con las etiquetas de porcentaje de tickets por estado
 priority_plot = (
     alt.Chart(priority_counts)
     .mark_arc()
