@@ -10,17 +10,6 @@ import pandas as pd
 import requests
 import streamlit as st
 
-# Función para iniciar el servidor FastAPI
-def run_api():
-    subprocess.run(["uvicorn", "api:app", "--host", "127.0.0.1", "--port", "8000"])
-
-# Iniciar el servidor FastAPI en un subproceso
-api_thread = threading.Thread(target=run_api, daemon=True)
-api_thread.start()
-
-# Esperar unos segundos para asegurarse de que el servidor FastAPI esté en funcionamiento
-time.sleep(5)
-
 # Show app title and description.
 st.set_page_config(page_title="Tickets final (UAGRM)", page_icon="🎫")
 st.title("🎫 Soporte de tickets")
@@ -79,6 +68,21 @@ if "df" not in st.session_state:
     # page runs). This ensures our data is persisted when the app updates.
     st.session_state.df = df
 
+# Inicializa los valores en session_state si no existen
+if 'issue' not in st.session_state:
+    st.session_state.issue = ""
+if 'priority' not in st.session_state:
+    st.session_state.priority = "Medio"
+
+# Definir la función de callback para el text_area
+def on_text_change():
+    # Aquí puedes definir la lógica para cambiar la prioridad basada en el texto
+    if "urgente" in st.session_state.issue.lower():
+        st.session_state.priority = "Alto"
+    elif "importante" in st.session_state.issue.lower():
+        st.session_state.priority = "Medio"
+    else:
+        st.session_state.priority = "Bajo"
 
 # Show a section to add a new ticket.
 st.header("Agregar un ticket")
@@ -86,15 +90,11 @@ st.header("Agregar un ticket")
 # We're adding tickets via an `st.form` and some input widgets. If widgets are used
 # in a form, the app will only rerun once the submit button is pressed.
 with st.form("add_ticket_form"):
-    issue = st.text_area("Describa el problema")
-    priority = st.selectbox("Prioridad", ["Alto", "Medio", "Bajo"])
+    st.text_area("Describa el problema", key="issue", on_change=on_text_change)
+    st.selectbox("Prioridad", ["Alto", "Medio", "Bajo"], key="priority")
     submitted = st.form_submit_button("Enviar")
 
 if submitted:
-    # Hacer una llamada REST al servidor FastAPI para obtener la prioridad
-    response = requests.post("http://127.0.0.1:8000/predict_priority", json={"issue": issue})
-    priority = response.json().get("priority", "bajo")
-
     # Make a dataframe for the new ticket and append it to the dataframe in session
     # state.
     recent_ticket_number = int(max(st.session_state.df.ID).split("-")[1])
@@ -103,9 +103,9 @@ if submitted:
         [
             {
                 "ID": f"TICKET-{recent_ticket_number+1}",
-                "Asunto": issue,
+                "Asunto": st.session_state.issue,
                 "Estado": "Abierto",
-                "Prioridad": priority,
+                "Prioridad": st.session_state.priority,
                 "Fecha Enviado": today,
             }
         ]
