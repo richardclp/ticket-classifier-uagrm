@@ -91,6 +91,17 @@ with st.container():
 # We're adding tickets via an `st.form` and some input widgets. If widgets are used
 # in a form, the app will only rerun once the submit button is pressed.
 with st.form("add_ticket_form"):
+    # Aplicar estilos personalizados al formulario
+    st.markdown(
+        """
+        <style>
+        .streamlit-form-container {
+            border: none; /* Elimina el borde gris del formulario */
+        }
+        </style>
+        """,
+        unsafe_allow_html=True
+    )
     submitted = st.form_submit_button("Enviar")
 
 if submitted:
