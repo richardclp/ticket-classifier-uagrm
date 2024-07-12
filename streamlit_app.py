@@ -81,9 +81,23 @@ def on_text_change():
     issue_text = st.session_state.issue.lower()
     
     # Define las listas de palabras clave
-    priority_high = ["urgente", "critico", "crítico", "inmediato", "alta prioridad"]
-    priority_medium = ["importante", "moderado", "media prioridad"]
-    priority_low = ["bajo", "menos importante", "baja prioridad"]
+    priority_high = [
+        "urgente", "critico", "crítico", "inmediato", 
+        "rapido", "alta prioridad", "prioridad alta", 
+        "emergencia", "inaplazable", "vital"
+    ]
+
+    priority_medium = [
+        "importante", "moderado", "media prioridad", 
+        "prioridad media", "significativo", "necesario", 
+        "esencial", "considerable", "atención media", "atencion media", "relevante"
+    ]
+
+    priority_low = [
+        "bajo", "menos importante", "baja prioridad", 
+        "prioridad baja", "mínimo", "minimo", "postergable", 
+        "retrasable", "deferible", "poco urgente", "secundario"
+    ]
     
     # Define una función auxiliar para verificar si alguna palabra clave está en el texto
     def contains_keyword(text, keywords):
