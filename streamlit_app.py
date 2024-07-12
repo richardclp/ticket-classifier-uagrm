@@ -1,5 +1,6 @@
 import datetime
 import random
+import unicodedata
 
 import altair as alt
 import numpy as np
@@ -76,13 +77,18 @@ if 'issue' not in st.session_state:
 if 'priority' not in st.session_state:
     st.session_state.priority = "Medio"
 
+def remove_accents(text):
+    """Elimina acentos y otras marcas diacríticas de un texto determinado."""
+    normalized = unicodedata.normalize('NFD', text)
+    return ''.join(char for char in normalized if unicodedata.category(char) != 'Mn')
+
 # Definir la función de callback para actualizar la prioridad
 def on_text_change():
-    issue_text = st.session_state.issue.lower()
+    issue_text = remove_accents(st.session_state.issue.lower())
     
     # Define las listas de palabras clave
     priority_high = [
-        "urgente", "critico", "crítico", "inmediato", 
+        "urgente", "critico", "inmediato", 
         "rapido", "alta prioridad", "prioridad alta", 
         "emergencia", "inaplazable", "vital"
     ]
@@ -95,7 +101,7 @@ def on_text_change():
 
     priority_low = [
         "bajo", "menos importante", "baja prioridad", 
-        "prioridad baja", "mínimo", "minimo", "postergable", 
+        "prioridad baja", "minimo", "postergable", 
         "retrasable", "deferible", "poco urgente", "secundario"
     ]
     
