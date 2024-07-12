@@ -93,7 +93,7 @@ st.markdown("""
     }
 </style>
 """, unsafe_allow_html=True)
-with st.container("custom-container"): 
+with st.container(border=True): 
     issue = st.text_area("Describa el problema", key="issue", on_change=on_text_change)
     priority = st.selectbox("Prioridad", ["Alto", "Medio", "Bajo"], key="priority")
 
