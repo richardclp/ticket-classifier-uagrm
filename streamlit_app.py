@@ -6,7 +6,7 @@ import numpy as np
 import pandas as pd
 import streamlit as st
 
-# Show app title and description.
+# Parametros de título y descripción de la aplicación.
 st.set_page_config(page_title="Tickets final (UAGRM)", page_icon="🎫")
 st.title("🎫 Soporte de tickets")
 st.write(
@@ -17,13 +17,13 @@ st.write(
     """
 )
 
-# Create a random Pandas dataframe with existing tickets.
+# Creando con pandas un Dataframe con datos aleatorio con tickets existentes 
 if "df" not in st.session_state:
 
-    # Set seed for reproducibility.
+    # Estableciendo semillas reproducible para los datos aleatorios.
     np.random.seed(42)
 
-    # Make up some fake issue descriptions.
+    # Realizando algunas descripciones de problemas ficticios.
     issue_descriptions = [
         "Problemas de conectividad de red en la oficina",
         "Aplicación de software se bloquea al iniciar",
@@ -47,7 +47,7 @@ if "df" not in st.session_state:
         "La herramienta de colaboración no envía notificaciones",
     ]
 
-    # Generate the dataframe with 100 rows/tickets.
+    # Genere el dataframe de datos con 100 filas o tickets.
     data = {
         "ID": [f"TICKET-{i}" for i in range(1100, 1000, -1)],
         "Asunto": np.random.choice(issue_descriptions, size=100),
@@ -60,8 +60,8 @@ if "df" not in st.session_state:
     }
     df = pd.DataFrame(data)
 
-    # Save the dataframe in session state (a dictionary-like object that persists across
-    # page runs). This ensures our data is persisted when the app updates.
+    # Guardando el dataframe de datos en la session_state (un objeto similar a un diccionario que persiste a lo largo
+    # de las ejecuciones de la página). Esto garantiza que nuestros datos persistan cuando se actualiza la aplicación.
     st.session_state.df = df
 
 # Inicializa los valores en session_state si no existen
@@ -81,8 +81,8 @@ def on_text_change():
     else:
         st.session_state.priority = "Bajo"
 
+# Mostrar un contenendor con un formulario para agregar un nuevo ticket.
 with st.container(border=True): 
-    # Show a section to add a new ticket.
     st.subheader("Agregar un ticket :sunglasses:", divider='blue')
     st.text_area("Describa el problema", key="issue", on_change=on_text_change)
     st.selectbox("Prioridad", ["Alto", "Medio", "Bajo"], key="priority")
@@ -90,8 +90,8 @@ with st.container(border=True):
         submitted = st.form_submit_button("Enviar")
 
 if submitted:
-    # Make a dataframe for the new ticket and append it to the dataframe in session
-    # state.
+    # Creando un dataframe de datos para el nuevo ticket para luego agregarlo 
+    # al dataframe en session_state.
     recent_ticket_number = int(max(st.session_state.df.ID).split("-")[1])
     today = datetime.datetime.now().strftime("%m-%d-%Y")
     df_new = pd.DataFrame(
@@ -106,12 +106,12 @@ if submitted:
         ]
     )
 
-    # Show a little success message.
+    # Mostrando un pequeño mensaje de éxito.
     st.write("Ticket guardado! Aquí están los detalles del ticket.:")
     st.dataframe(df_new, use_container_width=True, hide_index=True)
     st.session_state.df = pd.concat([df_new, st.session_state.df], axis=0)
 
-# Show section to view and edit existing tickets in a table.
+# Mostrar sección para ver y editar tickets existentes en una tabla.
 st.header("Tickets existentes")
 st.write(f"Numero de tickets: `{len(st.session_state.df)}`")
 
@@ -121,8 +121,8 @@ st.info(
     icon="✍️",
 )
 
-# Show the tickets dataframe with `st.data_editor`. This lets the user edit the table
-# cells. The edited data is returned as a new dataframe.
+# Mostrando el dataframe de los tickets con `st.data_editor`. Esto permite al usuario editar 
+# las celdas de la tabla. Los datos editados se devuelven como un nuevo dataframe.
 edited_df = st.data_editor(
     st.session_state.df,
     use_container_width=True,
@@ -141,21 +141,21 @@ edited_df = st.data_editor(
             required=True,
         ),
     },
-    # Disable editing the ID and Date Submitted columns.
+    # Deshabilitando la edición de las columnas ID y Fecha Enviado.
     disabled=["ID", "Fecha Enviado"],
 )
 
-# Show some metrics and charts about the ticket.
+# Muestra algunas métricas y gráficos de los tickets.
 st.header("Estadisticas")
 
-# Show metrics side by side using `st.columns` and `st.metric`.
+# Mostrando métricas una al lado de la otra usando `st.columns` y `st.metric`.
 col1, col2, col3 = st.columns(3)
 num_open_tickets = len(st.session_state.df[st.session_state.df.Estado == "Abierto"])
 col1.metric(label="Número de tickets abiertos", value=num_open_tickets, delta=10)
 col2.metric(label="Tiempo de primera respuesta (horas)", value=5.2, delta=-1.5)
 col3.metric(label="Tiempo medio de resolución (horas)", value=16, delta=2)
 
-# Show two Altair charts using `st.altair_chart`.
+# Mostrar dos gráficos usando `st.altair_chart`.
 st.write("")
 st.write("##### Estado del ticket por mes")
 status_plot = (
