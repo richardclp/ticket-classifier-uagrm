@@ -84,7 +84,7 @@ def on_text_change():
 # Show a section to add a new ticket.
 st.header("Agregar un ticket")
 st.markdown("""
-<fieldset style="border: none; padding: 0; margin: 0;">
+<fieldset style="border: 1em; padding: 0; margin: 0;">
     <legend style="font-size: 1.2em; font-weight: bold;">Agregar un ticket</legend>
 """, unsafe_allow_html=True )
 with st.container(): 
