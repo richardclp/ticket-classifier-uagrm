@@ -84,8 +84,8 @@ def on_text_change():
 with st.container(border=True): 
     # Show a section to add a new ticket.
     st.subheader("Agregar un ticket :sunglasses:", divider='blue')
-    issue = st.text_area("Describa el problema", key="issue", on_change=on_text_change)
-    priority = st.selectbox("Prioridad", ["Alto", "Medio", "Bajo"], key="priority")
+    st.text_area("Describa el problema", key="issue", on_change=on_text_change)
+    st.selectbox("Prioridad", ["Alto", "Medio", "Bajo"], key="priority")
     with st.form("add_ticket_form", border=False):
         submitted = st.form_submit_button("Enviar")
 
@@ -107,7 +107,7 @@ if submitted:
     )
 
     # Show a little success message.
-    st.write("Ticket enviado! Aquí están los detalles del ticket.:")
+    st.write("Ticket guardado! Aquí están los detalles del ticket.:")
     st.dataframe(df_new, use_container_width=True, hide_index=True)
     st.session_state.df = pd.concat([df_new, st.session_state.df], axis=0)
 
