@@ -72,7 +72,6 @@ if 'priority' not in st.session_state:
 
 # Definir la función de callback para actualizar la prioridad
 def on_text_change():
-    """
     issue_text = st.session_state.issue
     # Aquí puedes definir la lógica para cambiar la prioridad basada en el texto
     if "urgente" in issue_text.lower():
@@ -81,22 +80,17 @@ def on_text_change():
         st.session_state.priority = "Medio"
     else:
         st.session_state.priority = "Bajo"
-    """
-    # Actualizar cuadro de selección basado en new_text
-    pass
-    # Establecer indicador enviado para el envío del formulario
-    st.session_state.submitted = True
 
 # Show a section to add a new ticket.
 st.header("Agregar un ticket")
 
-# Probar el widget st.text_area con on_change fuera del formulario
-#st.text_area("Describa el problema fuera del formulario", key="test_issue", on_change=on_text_change)
+with st.container():  # Use a container to separate from form
+    issue = st.text_area("Describa el problema", key="issue", on_change=on_text_change)
 
 # We're adding tickets via an `st.form` and some input widgets. If widgets are used
 # in a form, the app will only rerun once the submit button is pressed.
 with st.form("add_ticket_form"):
-    issue = st.text_area("Describa el problema", key="issue", on_change=on_text_change)
+    #issue = st.text_area("Describa el problema", key="issue", on_change=on_text_change)
     priority = st.selectbox("Prioridad", ["Alto", "Medio", "Bajo"], key="priority")
     submitted = st.form_submit_button("Enviar")
     
