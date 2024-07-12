@@ -90,7 +90,7 @@ st.text_area("Describa el problema fuera del formulario", key="test_issue", on_c
 # We're adding tickets via an `st.form` and some input widgets. If widgets are used
 # in a form, the app will only rerun once the submit button is pressed.
 with st.form("add_ticket_form"):
-    issue = st.text_area("Describa el problema", key="issue", on_change=on_text_change)
+    issue = st.text_area("Describa el problema", key="issue")
     priority = st.selectbox("Prioridad", ["Alto", "Medio", "Bajo"], key="priority")
     submitted = st.form_submit_button("Enviar")
 
