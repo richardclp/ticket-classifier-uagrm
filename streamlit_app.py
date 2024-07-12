@@ -41,10 +41,10 @@ st.sidebar.markdown("""
 </style>
 """, unsafe_allow_html=True)
 # Generar enlaces en la barra lateral para navegar a cada sección
-st.sidebar.markdown("- [<span class='sidebar-link' id='home'>HOME</span>](#home)", unsafe_allow_html=True)
-st.sidebar.markdown("- [<span class='sidebar-link' id='create'>Crear Tickets</span>](#create)", unsafe_allow_html=True)
-st.sidebar.markdown("- [<span class='sidebar-link' id='view'>Ver Tickets</span>](#view)", unsafe_allow_html=True)
-st.sidebar.markdown("- [<span class='sidebar-link' id='stats'>Estadisticas</span>](#stats)", unsafe_allow_html=True)
+st.sidebar.markdown("- [<span class='sidebar-menu' id='home'>HOME</span>](#home)", unsafe_allow_html=True)
+st.sidebar.markdown("- [<span class='sidebar-menu' id='create'>Crear Tickets</span>](#create)", unsafe_allow_html=True)
+st.sidebar.markdown("- [<span class='sidebar-menu' id='view'>Ver Tickets</span>](#view)", unsafe_allow_html=True)
+st.sidebar.markdown("- [<span class='sidebar-menu' id='stats'>Estadisticas</span>](#stats)", unsafe_allow_html=True)
 
 st.markdown(
     """
