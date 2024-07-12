@@ -16,10 +16,11 @@ st.title("🎫 _TicketEase_")
 st.sidebar.subheader("Menú de Navegación")
 
 # Enlaces a secciones dentro de la misma página
-st.sidebar.markdown("- [HOME](#home)")
-st.sidebar.markdown("- [Crear Tickets](#create)")
-st.sidebar.markdown("- [Ver Tickets](#view)")
-st.sidebar.markdown("- [Estadisticas](#stats)")
+with st.sidebar.container(border=True):
+    st.sidebar.markdown("- [HOME](#home)")
+    st.sidebar.markdown("- [Crear Tickets](#create)")
+    st.sidebar.markdown("- [Ver Tickets](#view)")
+    st.sidebar.markdown("- [Estadisticas](#stats)")
 
 st.markdown(
     """
