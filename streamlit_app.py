@@ -10,7 +10,7 @@ import streamlit as st
 # Parametros de título y descripción de la aplicación.
 st.set_page_config(page_title="TicketEase - TFG Maestria en Ciencia de Datos UAGRM)", page_icon="🎫")
 st.markdown("""<a name="home"></a>""", unsafe_allow_html=True)
-st.title("🎫 _TicketEase_", divider='blue')
+st.title("🎫 _TicketEase_")
 
 # Renderizar el menú en la barra lateral izquierda
 st.sidebar.subheader("Menú de Navegación")
