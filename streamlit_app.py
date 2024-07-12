@@ -83,7 +83,7 @@ def on_text_change():
 
 with st.container(border=True): 
     # Show a section to add a new ticket.
-    st.header("Agregar un ticket")
+    st.subheader("Agregar un ticket :sunglasses:", divider='blue')
     issue = st.text_area("Describa el problema", key="issue", on_change=on_text_change)
     priority = st.selectbox("Prioridad", ["Alto", "Medio", "Bajo"], key="priority")
     with st.form("add_ticket_form", border=False):
