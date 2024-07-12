@@ -174,10 +174,21 @@ status_plot = (
 st.altair_chart(status_plot, use_container_width=True, theme="streamlit")
 
 st.write("##### Prioridades actuales de los tickets")
+# Calcular el conteo de cada prioridad y el porcentaje correspondiente
+priority_counts = edited_df['Prioridad'].value_counts().reset_index()
+priority_counts.columns = ['Prioridad', 'count']
+priority_counts['percentage'] = (priority_counts['count'] / priority_counts['count'].sum()) * 100
+
+# Crear el gráfico de pastel con las etiquetas de porcentaje
 priority_plot = (
-    alt.Chart(edited_df)
+    alt.Chart(priority_counts)
     .mark_arc()
-    .encode(theta="count():Q", color="Prioridad:N")
+    .encode(
+        theta=alt.Theta(field="count", type="quantitative"),
+        color=alt.Color(field="Prioridad", type="nominal"),
+        tooltip=[alt.Tooltip(field="Prioridad", type="nominal"),
+                 alt.Tooltip(field="percentage", type="quantitative", format=".2f")]
+    )
     .properties(height=300)
     .configure_legend(
         orient="bottom", titleFontSize=14, labelFontSize=14, titlePadding=5
