@@ -93,13 +93,7 @@ with st.container():
 with st.form("add_ticket_form"):
     # Aplicar estilos personalizados al formulario
     st.markdown(
-        """
-        <style>
-        .st-emotion-cache-4uzi61 {
-            border: none !important;
-        }
-        </style>
-        """,
+        """<style>.st-emotion-cache-4uzi61 { border: none !important; } </style>""",
         unsafe_allow_html=True
     )
     submitted = st.form_submit_button("Enviar")
