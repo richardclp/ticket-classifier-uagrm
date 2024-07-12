@@ -78,11 +78,21 @@ if 'priority' not in st.session_state:
 
 # Definir la función de callback para actualizar la prioridad
 def on_text_change():
-    issue_text = st.session_state.issue
-    # Aquí puedes definir la lógica para cambiar la prioridad basada en el texto
-    if "urgente" in issue_text.lower():
+    issue_text = st.session_state.issue.lower()
+    
+    # Define las listas de palabras clave
+    priority_high = ["urgente", "critico", "crítico", "inmediato", "alta prioridad"]
+    priority_medium = ["importante", "moderado", "media prioridad"]
+    priority_low = ["bajo", "menos importante", "baja prioridad"]
+    
+    # Define una función auxiliar para verificar si alguna palabra clave está en el texto
+    def contains_keyword(text, keywords):
+        return any(keyword in text for keyword in keywords)
+    
+    # Determina la prioridad basada en las palabras clave
+    if contains_keyword(issue_text, priority_high):
         st.session_state.priority = "Alto"
-    elif "importante" in issue_text.lower():
+    elif contains_keyword(issue_text, priority_medium):
         st.session_state.priority = "Medio"
     else:
         st.session_state.priority = "Bajo"
