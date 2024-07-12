@@ -12,7 +12,7 @@ st.title("🎫 Soporte de tickets")
 st.write(
     """
     Esta aplicación muestra cómo puedes crear una herramienta interna en Streamlit.
-    Aquí estamos implementar un flujo de trabajo de tickets de soporte. 
+    Aquí estamos implementando un flujo de trabajo de tickets de soporte. 
     El usuario puede crear un ticket, editar tickets existentes y ver algunas estadísticas.
     """
 )
@@ -70,7 +70,7 @@ if 'issue' not in st.session_state:
 if 'priority' not in st.session_state:
     st.session_state.priority = "Medio"
 
-# Definir la función de callback para el text_area
+# Definir la función de callback para actualizar la prioridad
 def on_text_change():
     issue_text = st.session_state.issue
     # Aquí puedes definir la lógica para cambiar la prioridad basada en el texto
@@ -84,11 +84,14 @@ def on_text_change():
 # Show a section to add a new ticket.
 st.header("Agregar un ticket")
 
+# Probar el widget st.text_area con on_change fuera del formulario
+st.text_area("Describa el problema fuera del formulario", key="test_issue", on_change=on_text_change)
+
 # We're adding tickets via an `st.form` and some input widgets. If widgets are used
 # in a form, the app will only rerun once the submit button is pressed.
 with st.form("add_ticket_form"):
-    st.text_area("Describa el problema", key="issue", on_change=on_text_change)
-    st.selectbox("Prioridad", ["Alto", "Medio", "Bajo"], key="priority")
+    issue = st.text_area("Describa el problema", key="issue", on_change=on_text_change)
+    priority = st.selectbox("Prioridad", ["Alto", "Medio", "Bajo"], key="priority")
     submitted = st.form_submit_button("Enviar")
 
 if submitted:
