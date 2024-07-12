@@ -7,6 +7,10 @@ import numpy as np
 import pandas as pd
 import streamlit as st
 
+# Parametros de título y descripción de la aplicación.
+st.set_page_config(page_title="TicketEase - TFG Maestria en Ciencia de Datos UAGRM)", page_icon="🎫")
+st.title("🎫 _TicketEase_")
+
 # Renderizar el menú en la barra lateral izquierda
 st.sidebar.subheader("Menú de Navegación")
 
@@ -16,9 +20,6 @@ st.sidebar.markdown("- [Crear Tickets](#create)")
 st.sidebar.markdown("- [Ver Tickets](#view)")
 st.sidebar.markdown("- [Estadisticas](#stats)")
 
-# Parametros de título y descripción de la aplicación.
-st.set_page_config(page_title="TicketEase - TFG Maestria en Ciencia de Datos UAGRM)", page_icon="🎫")
-st.title("🎫 _TicketEase_")
 st.markdown("""### <a name="home"></a>🎫 _TicketEase_""", unsafe_allow_html=True)
 st.markdown(
     """
