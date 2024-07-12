@@ -18,8 +18,8 @@ st.sidebar.markdown("- [Estadisticas](#stats)")
 
 # Parametros de título y descripción de la aplicación.
 st.set_page_config(page_title="TicketEase - TFG Maestria en Ciencia de Datos UAGRM)", page_icon="🎫")
-st.markdown("""### <a name="home"></a>🎫 _TicketEase_""", unsafe_allow_html=True)
 st.title("🎫 _TicketEase_")
+st.markdown("""### <a name="home"></a>🎫 _TicketEase_""", unsafe_allow_html=True)
 st.markdown(
     """
 #### Descripción de la Aplicación de **TicketEase** _(Gestión de Tickets)_
