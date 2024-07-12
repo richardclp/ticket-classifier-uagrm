@@ -9,18 +9,17 @@ import streamlit as st
 
 # Parametros de título y descripción de la aplicación.
 st.set_page_config(page_title="TicketEase - TFG Maestria en Ciencia de Datos UAGRM)", page_icon="🎫")
-st.markdown("""<a name="home"></a>""", unsafe_allow_html=True)
+st.markdown("""<br/><a name="home"></a>""", unsafe_allow_html=True)
 st.title("🎫 _TicketEase_")
 
 # Renderizar el menú en la barra lateral izquierda
 st.sidebar.subheader("Menú de Navegación")
 
 # Enlaces a secciones dentro de la misma página
-with st.sidebar.container(border=True):
-    st.sidebar.markdown("- [HOME](#home)")
-    st.sidebar.markdown("- [Crear Tickets](#create)")
-    st.sidebar.markdown("- [Ver Tickets](#view)")
-    st.sidebar.markdown("- [Estadisticas](#stats)")
+st.sidebar.markdown("- [HOME](#home)")
+st.sidebar.markdown("- [Crear Tickets](#create)")
+st.sidebar.markdown("- [Ver Tickets](#view)")
+st.sidebar.markdown("- [Estadisticas](#stats)")
 
 st.markdown(
     """
@@ -129,7 +128,7 @@ def on_text_change():
     else:
         st.session_state.priority = "Bajo"
 
-st.markdown("""<a name="create"></a><hr/>""", unsafe_allow_html=True)
+st.markdown("""<br/><a name="create"></a><hr/>""", unsafe_allow_html=True)
 # Mostrar un contenendor con un formulario para agregar un nuevo ticket.
 with st.container(border=True): 
     st.subheader("Agregar un ticket :sunglasses:", divider='blue')
@@ -160,7 +159,7 @@ if submitted:
     st.dataframe(df_new, use_container_width=True, hide_index=True)
     st.session_state.df = pd.concat([df_new, st.session_state.df], axis=0)
 
-st.markdown("""<a name="view"></a><hr/>""", unsafe_allow_html=True)
+st.markdown("""<br/><a name="view"></a><hr/>""", unsafe_allow_html=True)
 # Mostrar sección para ver y editar tickets existentes en una tabla.
 st.subheader("Tickets existentes", divider='blue')
 st.write(f"Numero de tickets: `{len(st.session_state.df)}`")
@@ -195,7 +194,7 @@ edited_df = st.data_editor(
     disabled=["ID", "Fecha Enviado"],
 )
 
-st.markdown("""<a name="stats"></a><hr/>""", unsafe_allow_html=True)
+st.markdown("""<br/><a name="stats"></a><hr/>""", unsafe_allow_html=True)
 # Muestra algunas métricas y gráficos de los tickets.
 st.subheader("Estadisticas", divider='blue')
 
