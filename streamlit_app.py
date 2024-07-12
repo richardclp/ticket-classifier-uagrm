@@ -95,8 +95,8 @@ with st.form("add_ticket_form"):
     st.markdown(
         """
         <style>
-        .streamlit-form-container {
-            border: none; /* Elimina el borde gris del formulario */
+        .st-emotion-cache-4uzi61 {
+            border: none importan!; /* Elimina el borde gris del formulario */
         }
         </style>
         """,
