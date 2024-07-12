@@ -1,13 +1,9 @@
 import datetime
 import random
-import subprocess
-import threading
-import time
 
 import altair as alt
 import numpy as np
 import pandas as pd
-import requests
 import streamlit as st
 
 # Show app title and description.
@@ -76,10 +72,11 @@ if 'priority' not in st.session_state:
 
 # Definir la función de callback para el text_area
 def on_text_change():
+    issue_text = st.session_state.issue
     # Aquí puedes definir la lógica para cambiar la prioridad basada en el texto
-    if "urgente" in st.session_state.issue.lower():
+    if "urgente" in issue_text.lower():
         st.session_state.priority = "Alto"
-    elif "importante" in st.session_state.issue.lower():
+    elif "importante" in issue_text.lower():
         st.session_state.priority = "Medio"
     else:
         st.session_state.priority = "Bajo"
