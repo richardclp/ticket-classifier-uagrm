@@ -81,19 +81,9 @@ def on_text_change():
     else:
         st.session_state.priority = "Bajo"
 
-# Show a section to add a new ticket.
-st.header("Agregar un ticket")
-st.markdown("""
-<style>
-    .custom-container {
-        border: 1px solid #ccc;
-        border-radius: 10px;
-        padding: 20px;
-        margin-bottom: 20px;
-    }
-</style>
-""", unsafe_allow_html=True)
 with st.container(border=True): 
+    # Show a section to add a new ticket.
+    st.header("Agregar un ticket")
     issue = st.text_area("Describa el problema", key="issue", on_change=on_text_change)
     priority = st.selectbox("Prioridad", ["Alto", "Medio", "Bajo"], key="priority")
     with st.form("add_ticket_form", border=False):
