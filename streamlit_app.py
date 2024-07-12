@@ -7,13 +7,19 @@ import pandas as pd
 import streamlit as st
 
 # Parametros de título y descripción de la aplicación.
-st.set_page_config(page_title="Tickets final (UAGRM)", page_icon="🎫")
-st.title("🎫 Soporte de tickets")
-st.write(
+st.set_page_config(page_title="TicketEase (TFG Maestria en Ciencia de Datos - UAGRM)", page_icon="🎫")
+st.title("🎫 Sistema TicketEase")
+st.markdown(
     """
-    Esta aplicación muestra cómo puedes crear una herramienta interna en Streamlit.
-    Aquí estamos implementando un flujo de trabajo de tickets de soporte. 
-    El usuario puede crear un ticket, editar tickets existentes y ver algunas estadísticas.
+# Descripción de la Aplicación de Gestión de Tickets
+
+Esta aplicación muestra cómo puedes crear una herramienta interna en Streamlit. Aquí estamos implementando un flujo de trabajo de tickets de soporte. El usuario puede crear un ticket, editar tickets existentes y ver algunas estadísticas.
+
+## Características principales
+
+1. **Crear Tickets:** Los usuarios pueden describir el problema y asignar una prioridad al ticket antes de enviarlo.
+2. **Editar Tickets:** Los tickets existentes pueden ser modificados para actualizar la información relevante o cambiar el estado.
+3. **Ver Estadísticas:** La aplicación proporciona gráficos que muestran estadísticas sobre el estado y la prioridad de los tickets, permitiendo una visión rápida y eficiente del flujo de trabajo de soporte.
     """
 )
 
@@ -136,7 +142,7 @@ edited_df = st.data_editor(
         ),
         "Prioridad": st.column_config.SelectboxColumn(
             "Prioridad",
-            help="Prioridad",
+            help="Prioridad del Ticket",
             options=["Alto", "Medio", "Bajo"],
             required=True,
         ),
