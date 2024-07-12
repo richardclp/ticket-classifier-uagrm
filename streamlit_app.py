@@ -56,7 +56,7 @@ if "df" not in st.session_state:
 
     # Genere el dataframe de datos con 100 filas o tickets.
     data = {
-        "ID": [f"TICKET-{i}" for i in range(1100, 1000, -1)],
+        "ID": [f"TKT-{i}" for i in range(1100, 1000, -1)],
         "Asunto": np.random.choice(issue_descriptions, size=100),
         "Estado": np.random.choice(["Abierto", "En Progreso", "Cerrado"], size=100),
         "Prioridad": np.random.choice(["Alto", "Medio", "Bajo"], size=100),
@@ -133,7 +133,7 @@ if submitted:
     df_new = pd.DataFrame(
         [
             {
-                "ID": f"TICKET-{recent_ticket_number+1}",
+                "ID": f"TKT-{recent_ticket_number+1}",
                 "Asunto": st.session_state.issue,
                 "Estado": "Abierto",
                 "Prioridad": st.session_state.priority,
