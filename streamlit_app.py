@@ -96,7 +96,7 @@ with st.form("add_ticket_form"):
         """
         <style>
         .st-emotion-cache-4uzi61 {
-            border: none importan!; /* Elimina el borde gris del formulario */
+            border: none !important;
         }
         </style>
         """,
