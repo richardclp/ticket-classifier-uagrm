@@ -15,11 +15,36 @@ st.title("🎫 _TicketEase_")
 # Renderizar el menú en la barra lateral izquierda
 st.sidebar.subheader("Menú de Navegación")
 
-# Enlaces a secciones dentro de la misma página
-st.sidebar.markdown("- [HOME](#home)")
-st.sidebar.markdown("- [Crear Tickets](#create)")
-st.sidebar.markdown("- [Ver Tickets](#view)")
-st.sidebar.markdown("- [Estadisticas](#stats)")
+# Renderizar el menú select en la barra lateral izquierda con estilos CSS
+st.sidebar.markdown("""
+<style>
+    .sidebar-menu {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        font-size: 18px;
+    }
+    .sidebar-menu li {
+        margin-bottom: 10px;
+    }
+    .sidebar-menu li a {
+        color: #333;
+        text-decoration: none;
+        display: block;
+        padding: 10px;
+        border-radius: 5px;
+        transition: background-color 0.3s ease;
+    }
+    .sidebar-menu li a:hover {
+        background-color: #f0f0f0;
+    }
+</style>
+""", unsafe_allow_html=True)
+# Generar enlaces en la barra lateral para navegar a cada sección
+st.sidebar.markdown("- [<span class='sidebar-link' id='home'>HOME</span>](#home)", unsafe_allow_html=True)
+st.sidebar.markdown("- [<span class='sidebar-link' id='create'>Crear Tickets</span>](#create)", unsafe_allow_html=True)
+st.sidebar.markdown("- [<span class='sidebar-link' id='view'>Ver Tickets</span>](#view)", unsafe_allow_html=True)
+st.sidebar.markdown("- [<span class='sidebar-link' id='stats'>Estadisticas</span>](#stats)", unsafe_allow_html=True)
 
 st.markdown(
     """
