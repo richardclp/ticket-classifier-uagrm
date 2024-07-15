@@ -20,7 +20,7 @@ st.sidebar.markdown("""
     list-style-type: none;
     margin: 0;
     padding: 0;
-    font-size: 18px;
+    font-size: 15px;
 }
 
 .sidebar-menu li {
@@ -178,7 +178,7 @@ def on_text_change():
     else:
         st.session_state.priority = "Bajo"
 
-st.markdown("""<br/><a name="create"></a><hr/>""", unsafe_allow_html=True)
+st.markdown("""<br id="create"/><hr/>""", unsafe_allow_html=True)
 # Mostrar un contenendor con un formulario para agregar un nuevo ticket.
 with st.container(border=True): 
     st.subheader("Agregar un ticket :sunglasses:", divider='blue')
@@ -209,7 +209,7 @@ if submitted:
     st.dataframe(df_new, use_container_width=True, hide_index=True)
     st.session_state.df = pd.concat([df_new, st.session_state.df], axis=0)
 
-st.markdown("""<br/><a name="view"></a><hr/>""", unsafe_allow_html=True)
+st.markdown("""<br id="view"/><hr/>""", unsafe_allow_html=True)
 # Mostrar sección para ver y editar tickets existentes en una tabla.
 st.subheader("Tickets existentes", divider='blue')
 st.write(f"Numero de tickets: `{len(st.session_state.df)}`")
@@ -244,7 +244,7 @@ edited_df = st.data_editor(
     disabled=["ID", "Fecha Enviado"],
 )
 
-st.markdown("""<br/><a name="stats"></a><hr/>""", unsafe_allow_html=True)
+st.markdown("""<br id="stats"/><hr/>""", unsafe_allow_html=True)
 # Muestra algunas métricas y gráficos de los tickets.
 st.subheader("Estadisticas", divider='blue')
 
