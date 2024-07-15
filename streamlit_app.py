@@ -18,25 +18,50 @@ st.sidebar.subheader("Menú de Navegación")
 # Renderizar el menú select en la barra lateral izquierda con estilos CSS
 st.sidebar.markdown("""
 <style>
-    .sidebar-menu {
+    .sidebar-menu, .sidebar-menu li {
         list-style-type: none;
         margin: 0;
         padding: 0;
         font-size: 18px;
     }
+
     .sidebar-menu li {
-        margin-bottom: 10px;
+        margin-bottom: 5px;
+        border-radius: 10px;
+        transition: all 0.3s ease;
     }
+
     .sidebar-menu li a {
         color: #333;
         text-decoration: none;
         display: block;
         padding: 10px;
         border-radius: 5px;
-        transition: background-color 0.3s ease;
+        transition: all 0.3s ease;
     }
-    .sidebar-menu li a:hover {
-        background-color: #f0f0f0;
+
+    .sidebar-menu li:hover, .sidebar-menu li a:hover  {
+        background-color: #d6f7fc;
+        transform: scale(1.05);
+    }
+
+    .sidebar-menu li a {
+        position: relative;
+    }
+
+    .sidebar-menu li a::before  {
+        content: '';
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        height: 3px;
+        width: 0;
+        background-color: #333;
+        transition: width 0.3s ease;
+    }
+
+    .sidebar-menu li a:hover::before{
+        width: 100%;
     }
 </style>
 """, unsafe_allow_html=True)
