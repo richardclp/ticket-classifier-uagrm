@@ -11,7 +11,7 @@ import streamlit as st
 st.set_page_config(page_title="TicketEase - TFG Maestria en Ciencia de Datos UAGRM)", page_icon="🎫")
 
 # Renderizar el menú en la barra lateral izquierda
-st.sidebar.subheader("Contenido", divider='blue')
+st.sidebar.subheader("🎫 Contenido", divider='blue')
 
 # Generar enlaces en la barra lateral para navegar a cada sección
 st.sidebar.markdown("""
@@ -59,7 +59,7 @@ st.sidebar.markdown("""
     <ul class='sidebar-menu'>
         <li><a href='#home'><span>🏠 Inicio</span></a></li>
         <li><a href='#create'><span>📝 Crear un Ticket</span></a></li>
-        <li><a href='#view'><span>🎫 Ver Tickets</span></a></li>
+        <li><a href='#view'><span>📋 Ver Tickets</span></a></li>
         <li><a href='#stats'><span>📊 Estadísticas</span></a></li>
     </ul>
 </div>
