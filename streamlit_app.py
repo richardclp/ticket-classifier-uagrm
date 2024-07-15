@@ -70,7 +70,7 @@ st.sidebar.markdown("""
 </div>
 """, unsafe_allow_html=True)
 
-st.markdown("""<br/><a name="home"></a>""", unsafe_allow_html=True)
+st.markdown("""<br id="home"/>""", unsafe_allow_html=True)
 st.title("🎫 _TicketEase_")
 st.markdown(
 """
