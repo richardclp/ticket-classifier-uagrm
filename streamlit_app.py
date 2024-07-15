@@ -62,10 +62,10 @@ st.sidebar.markdown("""
 </style>
 <div >
     <ul class='sidebar-menu'>
-        <li><a href='#home'><span>HOME</span></a></li>
-        <li><a href='#create'><span>Crear Tickets</span></a></li>
+        <li><a href='#home'><span>Inicio</span></a></li>
+        <li><a href='#create'><span>Crear un Ticket</span></a></li>
         <li><a href='#view'><span>Ver Tickets</span></a></li>
-        <li><a href='#stats'><span>Estadisticas</span></a></li>
+        <li><a href='#stats'><span>Estadísticas</span></a></li>
     </ul>
 </div>
 """, unsafe_allow_html=True)
