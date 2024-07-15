@@ -70,12 +70,10 @@ st.sidebar.markdown("""
 </div>
 """, unsafe_allow_html=True)
 
-#st.markdown("""<br/><a name="home"></a>""", unsafe_allow_html=True)
-#st.title("🎫 _TicketEase_")
+st.markdown("""<br/><a name="home"></a>""", unsafe_allow_html=True)
+st.title("🎫 _TicketEase_")
 st.markdown(
 """
-<br/><a name="home"></a>
-🎫 _TicketEase_
 #### Descripción de la Aplicación de **TicketEase** _(Gestión de Tickets)_
 
 En esta aplicación estamos implementando un flujo de trabajo de tickets de soporte. El usuario puede crear un ticket, editar tickets existentes y ver algunas estadísticas.
@@ -86,7 +84,7 @@ En esta aplicación estamos implementando un flujo de trabajo de tickets de sopo
 2. **Editar Tickets:** Los tickets existentes pueden ser modificados para actualizar la información relevante o cambiar el estado.
 3. **Ver Estadísticas:** La aplicación proporciona gráficos que muestran estadísticas sobre el estado y la prioridad de los tickets, permitiendo una visión rápida y eficiente del flujo de trabajo de soporte.
 """
-, unsafe_allow_html=True)
+)
 
 # Creando con pandas un Dataframe con datos aleatorio con tickets existentes 
 if "df" not in st.session_state:
