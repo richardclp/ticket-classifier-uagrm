@@ -42,8 +42,8 @@ st.sidebar.markdown("""
 """, unsafe_allow_html=True)
 # Generar enlaces en la barra lateral para navegar a cada sección
 st.sidebar.markdown("""
-<div class='sidebar-menu'>
-<ul>
+<div >
+<ul class='sidebar-menu'>
     <li><a href='#home'><span>HOME</span></a></li>
     <li><a href='#create'><span>Crear Tickets</span></a></li>
     <li><a href='#view'><span>Ver Tickets</span></a></li>
