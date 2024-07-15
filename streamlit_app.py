@@ -11,7 +11,7 @@ import streamlit as st
 st.set_page_config(page_title="TicketEase - TFG Maestria en Ciencia de Datos UAGRM)", page_icon="🎫")
 
 # Renderizar el menú en la barra lateral izquierda
-st.sidebar.subheader("Menú de Navegación")
+st.sidebar.subheader("Contenido", divider='blue')
 
 # Generar enlaces en la barra lateral para navegar a cada sección
 st.sidebar.markdown("""
@@ -22,14 +22,12 @@ st.sidebar.markdown("""
     padding: 0;
     font-size: 15px;
 }
-
 .sidebar-menu li {
     margin-bottom: 5px;
     border-radius: 10px;
     background-color: #d6d6d6;
     transition: all 0.3s ease;
 }
-
 .sidebar-menu li a {
     color: #333;
     text-decoration: none;
@@ -39,12 +37,10 @@ st.sidebar.markdown("""
     position: relative;
     transition: all 0.3s ease;
 }
-
 .sidebar-menu li:hover {
     background-color: #d6f7fc;
     transform: scale(1.05);
 }
-
 .sidebar-menu li a::before {
     content: '';
     position: absolute;
@@ -55,7 +51,6 @@ st.sidebar.markdown("""
     background-color: #333;
     transition: width 0.3s ease;
 }
-
 .sidebar-menu li a:hover::before {
     width: 100%;
 }
