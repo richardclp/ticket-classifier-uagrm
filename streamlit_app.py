@@ -71,7 +71,8 @@ st.sidebar.markdown("""
 """, unsafe_allow_html=True)
 st.markdown(
     """
-    <h1 id="home">🎫 <em>TicketEase</em></h1>
+    <br id="home"/>
+    <h1>🎫 <em>TicketEase</em></h1>
     <h4>Descripción de la Aplicación de <strong>TicketEase</strong> <em>(Gestión de Tickets)</em></h4>
     <p>En esta aplicación estamos implementando un flujo de trabajo de tickets de soporte. El usuario puede crear un ticket, editar tickets existentes y ver algunas estadísticas.</p>
 
