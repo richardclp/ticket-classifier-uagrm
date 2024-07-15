@@ -28,6 +28,7 @@ st.sidebar.markdown("""
     .sidebar-menu li {
         margin-bottom: 5px;
         border-radius: 10px;
+        background-color: #ededee;
         transition: all 0.3s ease;
     }
 
@@ -42,6 +43,7 @@ st.sidebar.markdown("""
 
     .sidebar-menu li:hover, .sidebar-menu li a:hover  {
         background-color: #d6f7fc;
+        border-radius: 10px;
         transform: scale(1.05);
     }
 
