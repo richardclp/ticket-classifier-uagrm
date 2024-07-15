@@ -70,10 +70,12 @@ st.sidebar.markdown("""
 </div>
 """, unsafe_allow_html=True)
 
-st.markdown("""<br/><a name="home"></a>""", unsafe_allow_html=True)
-st.title("🎫 _TicketEase_")
+#st.markdown("""<br/><a name="home"></a>""", unsafe_allow_html=True)
+#st.title("🎫 _TicketEase_")
 st.markdown(
     """
+<br/><a name="home"></a>
+🎫 _TicketEase_
 #### Descripción de la Aplicación de **TicketEase** _(Gestión de Tickets)_
 
 En esta aplicación estamos implementando un flujo de trabajo de tickets de soporte. El usuario puede crear un ticket, editar tickets existentes y ver algunas estadísticas.
