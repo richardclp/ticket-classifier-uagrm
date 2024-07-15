@@ -18,53 +18,49 @@ st.sidebar.subheader("Menú de Navegación")
 # Renderizar el menú select en la barra lateral izquierda con estilos CSS
 st.sidebar.markdown("""
 <style>
-    .sidebar-menu, .sidebar-menu li {
-        list-style-type: none;
-        margin: 0;
-        padding: 0;
-        font-size: 18px;
-    }
+.sidebar-menu, .sidebar-menu li {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    font-size: 18px;
+}
 
-    .sidebar-menu li {
-        margin-bottom: 5px;
-        border-radius: 10px;
-        background-color: #ededee;
-        transition: all 0.3s ease;
-    }
+.sidebar-menu li {
+    margin-bottom: 5px;
+    border-radius: 10px;
+    background-color: #ededee;
+    transition: all 0.3s ease;
+}
 
-    .sidebar-menu li a {
-        color: #333;
-        text-decoration: none;
-        display: block;
-        padding: 10px;
-        border-radius: 5px;
-        transition: all 0.3s ease;
-    }
+.sidebar-menu li a {
+    color: #333;
+    text-decoration: none;
+    display: block;
+    padding: 10px;
+    border-radius: 5px;
+    position: relative;
+    transition: all 0.3s ease;
+}
 
-    .sidebar-menu li:hover, .sidebar-menu li a:hover  {
-        background-color: #d6f7fc;
-        border-radius: 10px;
-        transform: scale(1.05);
-    }
+.sidebar-menu li:hover {
+    background-color: #d6f7fc;
+    transform: scale(1.05);
+}
 
-    .sidebar-menu li a {
-        position: relative;
-    }
+.sidebar-menu li a::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 3px;
+    width: 0;
+    background-color: #333;
+    transition: width 0.3s ease;
+}
 
-    .sidebar-menu li a::before  {
-        content: '';
-        position: absolute;
-        left: 0;
-        bottom: 0;
-        height: 3px;
-        width: 0;
-        background-color: #333;
-        transition: width 0.3s ease;
-    }
-
-    .sidebar-menu li a:hover::before{
-        width: 100%;
-    }
+.sidebar-menu li a:hover::before {
+    width: 100%;
+}
 </style>
 """, unsafe_allow_html=True)
 # Generar enlaces en la barra lateral para navegar a cada sección
