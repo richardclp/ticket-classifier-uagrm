@@ -9,13 +9,11 @@ import streamlit as st
 
 # Parametros de título y descripción de la aplicación.
 st.set_page_config(page_title="TicketEase - TFG Maestria en Ciencia de Datos UAGRM)", page_icon="🎫")
-st.markdown("""<br/><a name="home"></a>""", unsafe_allow_html=True)
-st.title("🎫 _TicketEase_")
 
 # Renderizar el menú en la barra lateral izquierda
 st.sidebar.subheader("Menú de Navegación")
 
-# Renderizar el menú select en la barra lateral izquierda con estilos CSS
+# Generar enlaces en la barra lateral para navegar a cada sección
 st.sidebar.markdown("""
 <style>
 .sidebar-menu, .sidebar-menu li {
@@ -62,19 +60,18 @@ st.sidebar.markdown("""
     width: 100%;
 }
 </style>
-""", unsafe_allow_html=True)
-# Generar enlaces en la barra lateral para navegar a cada sección
-st.sidebar.markdown("""
 <div >
-<ul class='sidebar-menu'>
-    <li><a href='#home'><span>HOME</span></a></li>
-    <li><a href='#create'><span>Crear Tickets</span></a></li>
-    <li><a href='#view'><span>Ver Tickets</span></a></li>
-    <li><a href='#stats'><span>Estadisticas</span></a></li>
-</ul>
+    <ul class='sidebar-menu'>
+        <li><a href='#home'><span>HOME</span></a></li>
+        <li><a href='#create'><span>Crear Tickets</span></a></li>
+        <li><a href='#view'><span>Ver Tickets</span></a></li>
+        <li><a href='#stats'><span>Estadisticas</span></a></li>
+    </ul>
 </div>
 """, unsafe_allow_html=True)
 
+st.markdown("""<br/><a name="home"></a>""", unsafe_allow_html=True)
+st.title("🎫 _TicketEase_")
 st.markdown(
     """
 #### Descripción de la Aplicación de **TicketEase** _(Gestión de Tickets)_
