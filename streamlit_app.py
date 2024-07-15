@@ -28,7 +28,7 @@ st.sidebar.markdown("""
 .sidebar-menu li {
     margin-bottom: 5px;
     border-radius: 10px;
-    background-color: #ededee;
+    background-color: #d6d6d6;
     transition: all 0.3s ease;
 }
 
