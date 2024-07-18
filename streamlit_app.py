@@ -67,10 +67,10 @@ st.sidebar.markdown("""
     document.addEventListener("DOMContentLoaded", function() {
         // Encuentra todos los enlaces que apuntan a secciones internas con el atributo href que comienza con #
         const links = document.querySelectorAll('a[href^="#"]');
-        
+        console.log("enlaces", links);
         // Itera sobre cada enlace
         links.forEach(link => {
-            console.log("enlace", link)
+            console.log("enlace", link);
             // Agrega un evento de clic a cada enlace
             link.addEventListener("click", function(e) {
                 // Previene el comportamiento predeterminado del enlace
