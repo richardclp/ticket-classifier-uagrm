@@ -22,6 +22,7 @@ st.sidebar.markdown("""
         
         // Itera sobre cada enlace
         links.forEach(link => {
+            console.log("enlace", link)
             // Agrega un evento de clic a cada enlace
             link.addEventListener("click", function(e) {
                 // Previene el comportamiento predeterminado del enlace
