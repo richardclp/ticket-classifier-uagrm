@@ -294,7 +294,7 @@ st.altair_chart(priority_plot, use_container_width=True, theme="streamlit")
 # Cargar el código JavaScript para smooth scrolling
 st.components.v1.html("""
 <script>
-    document.addEventListener("DOMContentLoaded", function() {
+    window.onload = function() {
         // Encuentra todos los enlaces que apuntan a secciones internas con el atributo href que comienza con #
         const links = document.querySelectorAll('a[href^="#"]');
         console.log("links:", links);
@@ -323,6 +323,6 @@ st.components.v1.html("""
                 }
             });
         });
-    });
+    };
 </script>
 """, height=0)
