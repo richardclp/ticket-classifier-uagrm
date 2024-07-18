@@ -67,7 +67,7 @@ section.main {
     </ul>
 </div>
 """, unsafe_allow_html=True)
-st.markdown("""<br id="home"/><hr style="margin:0;"/>""", unsafe_allow_html=True)
+st.markdown("""<br id="home"/>""", unsafe_allow_html=True)
 
 with st.container(border=True):
     st.markdown(
