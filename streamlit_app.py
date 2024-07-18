@@ -246,53 +246,54 @@ with st.container(border=True):
 
 st.markdown("""<br id="stats"/><hr/>""", unsafe_allow_html=True)
 # Muestra algunas métricas y gráficos de los tickets.
-st.subheader("Estadisticas", divider='blue')
+with st.container(border=True):
+    st.subheader("Estadisticas", divider='blue')
 
-# Mostrando métricas una al lado de la otra usando `st.columns` y `st.metric`.
-col1, col2, col3 = st.columns(3)
-num_open_tickets = len(st.session_state.df[st.session_state.df.Estado == "Abierto"])
-col1.metric(label="Número de tickets abiertos", value=num_open_tickets, delta=10)
-col2.metric(label="Tiempo de primera respuesta (horas)", value=5.2, delta=-1.5)
-col3.metric(label="Tiempo medio de resolución (horas)", value=16, delta=2)
+    # Mostrando métricas una al lado de la otra usando `st.columns` y `st.metric`.
+    col1, col2, col3 = st.columns(3)
+    num_open_tickets = len(st.session_state.df[st.session_state.df.Estado == "Abierto"])
+    col1.metric(label="Número de tickets abiertos", value=num_open_tickets, delta=10)
+    col2.metric(label="Tiempo de primera respuesta (horas)", value=5.2, delta=-1.5)
+    col3.metric(label="Tiempo medio de resolución (horas)", value=16, delta=2)
 
-# Mostrar dos gráficos usando `st.altair_chart`.
-st.write("")
-st.write("##### Estado del ticket por mes")
-# creando un gráfico de barras apiladas, con la cantidad de tickets por estado para cada mes
-status_plot = (
-    alt.Chart(edited_df)
-    .mark_bar()
-    .encode(
-        x="month(Fecha Enviado):O",
-        y="count():Q",
-        xOffset="Estado:N",
-        color="Estado:N",
+    # Mostrar dos gráficos usando `st.altair_chart`.
+    st.write("")
+    st.write("##### Estado del ticket por mes")
+    # creando un gráfico de barras apiladas, con la cantidad de tickets por estado para cada mes
+    status_plot = (
+        alt.Chart(edited_df)
+        .mark_bar()
+        .encode(
+            x="month(Fecha Enviado):O",
+            y="count():Q",
+            xOffset="Estado:N",
+            color="Estado:N",
+        )
+        .configure_legend(
+            orient="bottom", titleFontSize=14, labelFontSize=14, titlePadding=5
+        )
     )
-    .configure_legend(
-        orient="bottom", titleFontSize=14, labelFontSize=14, titlePadding=5
-    )
-)
-st.altair_chart(status_plot, use_container_width=True, theme="streamlit")
+    st.altair_chart(status_plot, use_container_width=True, theme="streamlit")
 
-st.write("##### Prioridades actuales de los tickets")
-# Calcular el conteo de cada prioridad y el porcentaje correspondiente
-priority_counts = edited_df['Prioridad'].value_counts().reset_index()
-priority_counts.columns = ['Prioridad', 'count']
-priority_counts['percentage'] = (priority_counts['count'] / priority_counts['count'].sum()) * 100
+    st.write("##### Prioridades actuales de los tickets")
+    # Calcular el conteo de cada prioridad y el porcentaje correspondiente
+    priority_counts = edited_df['Prioridad'].value_counts().reset_index()
+    priority_counts.columns = ['Prioridad', 'count']
+    priority_counts['percentage'] = (priority_counts['count'] / priority_counts['count'].sum()) * 100
 
-# Creando un gráfico de pastel con las etiquetas de porcentaje de tickets por estado
-priority_plot = (
-    alt.Chart(priority_counts)
-    .mark_arc()
-    .encode(
-        theta=alt.Theta(field="count", type="quantitative"),
-        color=alt.Color(field="Prioridad", type="nominal"),
-        tooltip=[alt.Tooltip(field="Prioridad", type="nominal"),
-                 alt.Tooltip(field="percentage", type="quantitative", format=".2f")]
+    # Creando un gráfico de pastel con las etiquetas de porcentaje de tickets por estado
+    priority_plot = (
+        alt.Chart(priority_counts)
+        .mark_arc()
+        .encode(
+            theta=alt.Theta(field="count", type="quantitative"),
+            color=alt.Color(field="Prioridad", type="nominal"),
+            tooltip=[alt.Tooltip(field="Prioridad", type="nominal"),
+                    alt.Tooltip(field="percentage", type="quantitative", format=".2f")]
+        )
+        .properties(height=300)
+        .configure_legend(
+            orient="bottom", titleFontSize=14, labelFontSize=14, titlePadding=5
+        )
     )
-    .properties(height=300)
-    .configure_legend(
-        orient="bottom", titleFontSize=14, labelFontSize=14, titlePadding=5
-    )
-)
-st.altair_chart(priority_plot, use_container_width=True, theme="streamlit")
+    st.altair_chart(priority_plot, use_container_width=True, theme="streamlit")
