@@ -293,3 +293,13 @@ priority_plot = (
     )
 )
 st.altair_chart(priority_plot, use_container_width=True, theme="streamlit")
+
+# Cargar SmoothScroll.js usando un CDN
+st.markdown("""
+<script src="https://cdn.jsdelivr.net/npm/smoothscroll-polyfill@0.4.3/dist/smoothscroll.min.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        smoothscroll.polyfill();
+    });
+</script>
+""", unsafe_allow_html=True)
