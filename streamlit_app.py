@@ -67,20 +67,21 @@ section.main {
     </ul>
 </div>
 """, unsafe_allow_html=True)
+st.markdown("""<br id="home"/><hr style="margin:0;"/>""", unsafe_allow_html=True)
+
 with st.container(border=True):
     st.markdown(
-"""<br id="home"/><hr style="margin:0;"/>
-<h1 style="padding-top: 0;">🎫 <em>TicketEase</em></h1>
-<h4>Descripción de la Aplicación de <strong>TicketEase</strong> <em>(Gestión de Tickets)</em></h4>
-<p>En esta aplicación estamos implementando un flujo de trabajo de tickets de soporte. El usuario puede crear un ticket, editar tickets existentes y ver algunas estadísticas.</p>
+    """<h1 style="padding-top: 0;">🎫 <em>TicketEase</em></h1>
+    <h4>Descripción de la Aplicación de <strong>TicketEase</strong> <em>(Gestión de Tickets)</em></h4>
+    <p>En esta aplicación estamos implementando un flujo de trabajo de tickets de soporte. El usuario puede crear un ticket, editar tickets existentes y ver algunas estadísticas.</p>
 
-<h5>Características principales</h5>
-<ol>
-    <li><strong>Crear Tickets:</strong> Los usuarios pueden describir el problema y asignar una prioridad al ticket antes de enviarlo.</li>
-    <li><strong>Editar Tickets:</strong> Los tickets existentes pueden ser modificados para actualizar la información relevante o cambiar el estado.</li>
-    <li><strong>Ver Estadísticas:</strong> La aplicación proporciona gráficos que muestran estadísticas sobre el estado y la prioridad de los tickets, permitiendo una visión rápida y eficiente del flujo de trabajo de soporte.</li>
-</ol>
-""", unsafe_allow_html=True
+    <h5>Características principales</h5>
+    <ol>
+        <li><strong>Crear Tickets:</strong> Los usuarios pueden describir el problema y asignar una prioridad al ticket antes de enviarlo.</li>
+        <li><strong>Editar Tickets:</strong> Los tickets existentes pueden ser modificados para actualizar la información relevante o cambiar el estado.</li>
+        <li><strong>Ver Estadísticas:</strong> La aplicación proporciona gráficos que muestran estadísticas sobre el estado y la prioridad de los tickets, permitiendo una visión rápida y eficiente del flujo de trabajo de soporte.</li>
+    </ol>
+    """, unsafe_allow_html=True
     )
 
 # Creando con pandas un Dataframe con datos aleatorio con tickets existentes 
