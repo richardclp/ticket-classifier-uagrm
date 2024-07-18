@@ -63,38 +63,6 @@ st.sidebar.markdown("""
         <li><a href='#stats'><span>📊 Estadísticas</span></a></li>
     </ul>
 </div>
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        // Encuentra todos los enlaces que apuntan a secciones internas con el atributo href que comienza con #
-        const links = document.querySelectorAll('a[href^="#"]');
-        console.log("enlaces", links);
-        // Itera sobre cada enlace
-        links.forEach(link => {
-            console.log("enlace", link);
-            // Agrega un evento de clic a cada enlace
-            link.addEventListener("click", function(e) {
-                // Previene el comportamiento predeterminado del enlace
-                e.preventDefault();
-                
-                // Obtiene el destino del enlace (la sección a la que se dirige)
-                const targetId = this.getAttribute("href").substring(1);
-                const targetElement = document.getElementById(targetId);
-                
-                // Verifica si el elemento destino existe
-                if (targetElement) {
-                    // Calcula la posición del elemento en la página
-                    const offsetTop = targetElement.offsetTop;
-                    
-                    // Desplaza la página suavemente hasta la posición del elemento
-                    window.scrollTo({
-                        top: offsetTop,
-                        behavior: "smooth"
-                    });
-                }
-            });
-        });
-    });
-</script>
 """, unsafe_allow_html=True)
 st.markdown(
 """<br id="home"/><hr style="margin:0;"/>
@@ -322,3 +290,39 @@ priority_plot = (
     )
 )
 st.altair_chart(priority_plot, use_container_width=True, theme="streamlit")
+
+# Agregar el código JavaScript para smooth scrolling
+st.markdown("""
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // Encuentra todos los enlaces que apuntan a secciones internas con el atributo href que comienza con #
+        const links = document.querySelectorAll('a[href^="#"]');
+        console.log("links:", links);
+        // Itera sobre cada enlace
+        links.forEach(link => {
+            // Agrega un evento de clic a cada enlace
+            link.addEventListener("click", function(e) {
+                // Previene el comportamiento predeterminado del enlace
+                e.preventDefault();
+                console.log("link:", link);
+                
+                // Obtiene el destino del enlace (la sección a la que se dirige)
+                const targetId = this.getAttribute("href").substring(1);
+                const targetElement = document.getElementById(targetId);
+                
+                // Verifica si el elemento destino existe
+                if (targetElement) {
+                    // Calcula la posición del elemento en la página
+                    const offsetTop = targetElement.offsetTop;
+                    
+                    // Desplaza la página suavemente hasta la posición del elemento
+                    window.scrollTo({
+                        top: offsetTop,
+                        behavior: "smooth"
+                    });
+                }
+            });
+        });
+    });
+</script>
+""", unsafe_allow_html=True)
