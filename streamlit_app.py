@@ -210,38 +210,39 @@ if submitted:
 
 st.markdown("""<br id="view"/><hr/>""", unsafe_allow_html=True)
 # Mostrar sección para ver y editar tickets existentes en una tabla.
-st.subheader("Tickets existentes", divider='blue')
-st.write(f"Numero de tickets: `{len(st.session_state.df)}`")
+with st.container(border=True):
+    st.subheader("Tickets existentes", divider='blue')
+    st.write(f"Numero de tickets: `{len(st.session_state.df)}`")
 
-st.info(
-    "Puedes editar los tickets haciendo doble clic en una celda. ¡Observe cómo los gráficos a continuación se actualizan"
-    "automáticamente! También puede ordenar la tabla haciendo clic en los encabezados de las columnas.",
-    icon="✍️",
-)
+    st.info(
+        "Puedes editar los tickets haciendo doble clic en una celda. ¡Observe cómo los gráficos a continuación se actualizan"
+        "automáticamente! También puede ordenar la tabla haciendo clic en los encabezados de las columnas.",
+        icon="✍️",
+    )
 
-# Mostrando el dataframe de los tickets con `st.data_editor`. Esto permite al usuario editar 
-# las celdas de la tabla. Los datos editados se devuelven como un nuevo dataframe.
-edited_df = st.data_editor(
-    st.session_state.df,
-    use_container_width=True,
-    hide_index=True,
-    column_config={
-        "Estado": st.column_config.SelectboxColumn(
-            "Estado",
-            help="Estado del Ticket",
-            options=["Abierto", "En Progreso", "Cerrado"],
-            required=True,
-        ),
-        "Prioridad": st.column_config.SelectboxColumn(
-            "Prioridad",
-            help="Prioridad del Ticket",
-            options=["Alto", "Medio", "Bajo"],
-            required=True,
-        ),
-    },
-    # Deshabilitando la edición de las columnas ID y Fecha Enviado.
-    disabled=["ID", "Fecha Enviado"],
-)
+    # Mostrando el dataframe de los tickets con `st.data_editor`. Esto permite al usuario editar 
+    # las celdas de la tabla. Los datos editados se devuelven como un nuevo dataframe.
+    edited_df = st.data_editor(
+        st.session_state.df,
+        use_container_width=True,
+        hide_index=True,
+        column_config={
+            "Estado": st.column_config.SelectboxColumn(
+                "Estado",
+                help="Estado del Ticket",
+                options=["Abierto", "En Progreso", "Cerrado"],
+                required=True,
+            ),
+            "Prioridad": st.column_config.SelectboxColumn(
+                "Prioridad",
+                help="Prioridad del Ticket",
+                options=["Alto", "Medio", "Bajo"],
+                required=True,
+            ),
+        },
+        # Deshabilitando la edición de las columnas ID y Fecha Enviado.
+        disabled=["ID", "Fecha Enviado"],
+    )
 
 st.markdown("""<br id="stats"/><hr/>""", unsafe_allow_html=True)
 # Muestra algunas métricas y gráficos de los tickets.
