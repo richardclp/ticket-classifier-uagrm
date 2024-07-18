@@ -291,8 +291,8 @@ priority_plot = (
 )
 st.altair_chart(priority_plot, use_container_width=True, theme="streamlit")
 
-# Agregar el código JavaScript para smooth scrolling
-st.markdown("""
+# Cargar el código JavaScript para smooth scrolling
+st.components.v1.html("""
 <script>
     document.addEventListener("DOMContentLoaded", function() {
         // Encuentra todos los enlaces que apuntan a secciones internas con el atributo href que comienza con #
@@ -325,4 +325,4 @@ st.markdown("""
         });
     });
 </script>
-""", unsafe_allow_html=True)
+""", height=0)
