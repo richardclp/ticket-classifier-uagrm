@@ -16,6 +16,9 @@ st.sidebar.subheader("ð« Contenido", divider='blue')
 # Generar enlaces en la barra lateral para navegar a cada secciÃ³n
 st.sidebar.markdown("""
 <style>
+html {
+    scroll-behavior: smooth;
+}
 .sidebar-menu, .sidebar-menu li {
     list-style-type: none;
     margin: 0;
@@ -290,13 +293,3 @@ priority_plot = (
     )
 )
 st.altair_chart(priority_plot, use_container_width=True, theme="streamlit")
-
-# Cargar el cÃ³digo JavaScript para smooth scrolling
-st.components.v1.html("""
-<script src="https://cdn.jsdelivr.net/npm/smoothscroll-polyfill@0.4.3/dist/smoothscroll.min.js"></script>
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        smoothscroll.polyfill();
-    });
-</script>
-""", height=0)
